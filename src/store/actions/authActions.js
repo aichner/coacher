@@ -55,6 +55,29 @@ export const signOut = () => {
   };
 };
 
+export const createContact = (contact) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+    // Get current user unique id
+    const uid = firebase.auth().currentUser.uid;
+
+    if (uid && contact) {
+      return firestore
+        .collection("users")
+        .add(contact)
+        .then(() => {
+          return true;
+        })
+        .catch((err) => {
+          return false;
+        });
+    } else {
+      return false;
+    }
+  };
+};
+
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2020 Werbeagentur Christian Aichner

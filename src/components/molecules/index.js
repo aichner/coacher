@@ -3,10 +3,11 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import CookieModal from "./CookieModal";
+import CreateContact from "./CreateContact";
 //#endregion
 
 //#region > Exports
-export { Footer, Navbar, CookieModal };
+export { Footer, Navbar, CookieModal, CreateContact };
 //#endregion
 
 /**
