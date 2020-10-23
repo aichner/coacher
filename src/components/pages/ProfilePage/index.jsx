@@ -41,7 +41,7 @@ class ProfilePage extends React.Component {
       );
     } else {
       // Check if logged in
-      if (auth.uid === undefined) return <Redirect to="/login" />;
+      if (auth.uid === undefined) return <Redirect to="/" />;
 
       return (
         <MDBContainer className="text-center my-5 py-5">
