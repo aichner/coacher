@@ -110,7 +110,7 @@ class LoginPage extends React.Component {
           <MDBRow className="flex-center">
             <MDBCol md="4">
               {authErrorDetails && (
-                <MDBAlert color="danger">
+                <MDBAlert color="danger" className="mt-3">
                   The password is invalid or the user does not exist.
                 </MDBAlert>
               )}
