@@ -1,3 +1,5 @@
+@import "./variables";
+
 .flyout {
   display: flex;
   flex-direction: column;
@@ -81,12 +83,23 @@
 // Buttons
 .btn {
   box-shadow: none !important;
+
+  &.btn-blue {
+    background: $blue !important;
+
+    &:hover {
+      background: lighten($blue, 5%) !important;
+    }
+  }
+
   &:hover {
     box-shadow: none;
   }
+
   &:active {
     box-shadow: none;
   }
+
   &:focus {
     box-shadow: none;
   }

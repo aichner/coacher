@@ -29,7 +29,7 @@ import {
 // To be added here
 
 //> Images
-import IMGlogo from "../../../assets/agency-small.png";
+import { ReactComponent as Logo } from "../../../assets/logo.svg";
 //#endregion
 
 //#region > Config
@@ -102,11 +102,9 @@ class LoginPage extends React.Component {
 
     return (
       <MDBContainer id="login" className="text-center pt-5 mt-5">
-        <img
-          src={IMGlogo}
-          style={{ maxWidth: "100%", maxHeight: "150px" }}
-          alt="SithCult logo"
+        <Logo
           className="img-fluid"
+          style={{ maxWidth: "100%", maxHeight: "100px" }}
         />
         <form onSubmit={this.submitHandler}>
           <MDBRow className="flex-center">
@@ -143,7 +141,7 @@ class LoginPage extends React.Component {
               />
             </MDBCol>
           </MDBRow>
-          <MDBBtn color="orange" type="submit">
+          <MDBBtn color="blue" type="submit">
             <MDBIcon icon="angle-right" />
             Login
           </MDBBtn>

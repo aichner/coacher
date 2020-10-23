@@ -45,12 +45,10 @@ class App extends React.Component {
       <Router>
         <ScrollToTop>
           <div className="flyout">
-            <Navbar />
             <main>
               <Routes />
               <CookieModal saveCookie={this.saveCookie} />
             </main>
-            <Footer />
           </div>
         </ScrollToTop>
       </Router>
