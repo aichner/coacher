@@ -36,17 +36,17 @@ import {
 const AVAILABLE_SKILLS = [
   {
     label: "3D Modelling",
-    value: "3dmodelling",
+    value: "dmodelling",
     type: "3d",
   },
   {
     label: "Interior design",
-    value: "3dinterior",
+    value: "dinterior",
     type: "3d",
   },
   {
     label: "Exterior design",
-    value: "3dexterior",
+    value: "dexterior",
     type: "3d",
   },
   {
@@ -107,6 +107,11 @@ const AVAILABLE_SKILLS = [
   {
     label: "Web frontend",
     value: "webfrontend",
+    type: "web",
+  },
+  {
+    label: "Wordpress",
+    value: "webwordpress",
     type: "web",
   },
 ];
@@ -302,7 +307,12 @@ class CreateContact extends React.Component {
                   Based on previous experience, how much trust do you put into
                   this person? (Default: 50)
                 </p>
-                <MDBRangeInput min={0} max={100} value={50} />
+                <MDBRangeInput
+                  min={0}
+                  max={100}
+                  value={this.state.trust}
+                  getValue={(value) => this.setState({ trust: value })}
+                />
                 <p className="mb-0 mt-3">Base leadership type</p>
                 <p className="small mb-2 text-muted">
                   In what leadership form is the person most productive?
