@@ -118,6 +118,24 @@ const AVAILABLE_SKILLS = [
   },
 ];
 
+//#region > Functions
+function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const trustA = a.data.insight.trust;
+  const trustB = b.data.insight.trust;
+
+  let comparison = 0;
+
+  if (trustA < trustB) {
+    comparison = 1;
+  } else if (trustA > trustB) {
+    comparison = -1;
+  }
+
+  return comparison;
+}
+//#endregion
+
 //#region > Components
 class ProfilePage extends React.Component {
   state = { search: "", activeTab: "all", createContact: false };
@@ -358,7 +376,7 @@ class ProfilePage extends React.Component {
                   </MDBRow>
                 </MDBListGroupItem>
                 {this.state.users &&
-                  this.state.users.map((user, u) => {
+                  this.state.users.sort(compare).map((user, u) => {
                     const data = user.data;
 
                     return (
