@@ -120,13 +120,111 @@ const AVAILABLE_SKILLS = [
 
 //#region > Components
 class ProfilePage extends React.Component {
-  state = { search: "", activeTab: 0, createContact: false };
+  state = { search: "", activeTab: "all", createContact: false };
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.init();
+  };
+
+  init = async () => {
     const res = await this.props.getContacts();
 
     this.setState({
       users: res,
+      allUsers: res,
+    });
+  };
+
+  calculateTrust = (trust) => {
+    console.log(trust);
+
+    switch (true) {
+      case trust < 25 && trust >= 0:
+        return (
+          <p className="text-danger">
+            <MDBIcon icon="angle-double-down" /> {trust}
+          </p>
+        );
+      case trust < 50:
+        return (
+          <p className="text-warning">
+            <MDBIcon icon="angle-down" /> {trust}
+          </p>
+        );
+      case trust >= 50 && trust < 80:
+        return (
+          <p className="text-info">
+            <MDBIcon icon="angle-up" /> {trust}
+          </p>
+        );
+      case trust >= 80:
+        return (
+          <p className="text-success">
+            <MDBIcon icon="angle-double-up" /> {trust}
+          </p>
+        );
+      default:
+        return (
+          <p className="text-warning">
+            <MDBIcon icon="slash" /> NULL
+          </p>
+        );
+    }
+  };
+
+  cleanString = (str) => {
+    return str.split(" ").join("").trim().toLowerCase();
+  };
+
+  search = (value) => {
+    const users = this.state.allUsers;
+    let res = undefined;
+
+    if (value && users) {
+      res = users.filter(
+        (user) =>
+          (user.data.first_name &&
+            this.cleanString(user.data.first_name).includes(
+              this.cleanString(value)
+            )) ||
+          (user.data.last_name &&
+            this.cleanString(user.data.last_name).includes(
+              this.cleanString(value)
+            )) ||
+          (user.data.contact.email &&
+            this.cleanString(user.data.contact.email).includes(
+              this.cleanString(value)
+            )) ||
+          (user.data.contact.phone &&
+            this.cleanString(user.data.contact.phone).includes(
+              this.cleanString(value)
+            )) ||
+          (user.data.company &&
+            this.cleanString(user.data.company).includes(
+              this.cleanString(value)
+            ))
+      );
+    }
+
+    this.setState({
+      search: value,
+      users: value ? res : this.state.allUsers,
+    });
+  };
+
+  changeSelection = (selection) => {
+    let users = this.state.allUsers;
+    const select = AVAILABLE_SKILLS.filter(
+      (skill) => skill.type === selection
+    )[0];
+
+    if (select) {
+      users = users.filter((user) => user.data.skills[select.value] === true);
+    }
+
+    this.setState({
+      activeTab: selection,
+      users,
     });
   };
 
@@ -164,68 +262,75 @@ class ProfilePage extends React.Component {
                   type="search"
                   className="form-control"
                   label="Search"
-                  onChange={(e) => this.setState({ search: e.target.value })}
+                  onChange={(e) => this.search(e.target.value)}
                   value={this.state.search}
                   outline
                 />
               </div>
               <MDBListGroup className="menu my-4">
                 <MDBListGroupItem
-                  className={this.state.activeTab === 0 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 0 })}
+                  className={
+                    this.state.activeTab === "all" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("all")}
                 >
                   <MDBIcon icon="id-card" />
                   Contacts
                 </MDBListGroupItem>
                 <MDBListGroupItem
-                  className={this.state.activeTab === 1 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 1 })}
+                  className={
+                    this.state.activeTab === "freq" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("freq")}
                 >
                   <MDBIcon far icon="clock" />
                   Frequently
                 </MDBListGroupItem>
                 <hr />
                 <MDBListGroupItem
-                  className={this.state.activeTab === 2 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 2 })}
+                  className={
+                    this.state.activeTab === "3d" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("3d")}
                 >
                   <MDBIcon icon="cube" />
                   3D
                 </MDBListGroupItem>
                 <MDBListGroupItem
-                  className={this.state.activeTab === 3 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 3 })}
+                  className={
+                    this.state.activeTab === "video" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("video")}
                 >
                   <MDBIcon icon="film" />
                   Video
                 </MDBListGroupItem>
                 <MDBListGroupItem
-                  className={this.state.activeTab === 4 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 4 })}
+                  className={
+                    this.state.activeTab === "design" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("design")}
                 >
                   <MDBIcon icon="pen-nib" />
                   Graphics
                 </MDBListGroupItem>
                 <MDBListGroupItem
-                  className={this.state.activeTab === 5 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 5 })}
+                  className={
+                    this.state.activeTab === "sales" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("sales")}
                 >
                   <MDBIcon icon="headset" />
                   Sales / Affiliate
                 </MDBListGroupItem>
                 <MDBListGroupItem
-                  className={this.state.activeTab === 6 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 6 })}
+                  className={
+                    this.state.activeTab === "web" ? "active" : undefined
+                  }
+                  onClick={() => this.changeSelection("web")}
                 >
                   <MDBIcon icon="server" />
-                  Web Backend
-                </MDBListGroupItem>
-                <MDBListGroupItem
-                  className={this.state.activeTab === 7 ? "active" : undefined}
-                  onClick={() => this.setState({ activeTab: 7 })}
-                >
-                  <MDBIcon icon="desktop" />
-                  Web Frontend
+                  Web
                 </MDBListGroupItem>
               </MDBListGroup>
               <div>
@@ -247,6 +352,9 @@ class ProfilePage extends React.Component {
                     <MDBCol className="text-right">
                       <p>Labels</p>
                     </MDBCol>
+                    <MDBCol className="text-right">
+                      <p>Ranking</p>
+                    </MDBCol>
                   </MDBRow>
                 </MDBListGroupItem>
                 {this.state.users &&
@@ -260,16 +368,18 @@ class ProfilePage extends React.Component {
                             <p className="font-weight-bolder">
                               {data.first_name} {data.last_name}
                             </p>
+                            {data.company && (
+                              <p className="small text-muted font-weight-bold">
+                                {data.company}
+                              </p>
+                            )}
                             {data.insight?.currentJob && (
                               <p className="small blue-text">
                                 {data.insight.currentJob}
                               </p>
                             )}
-                            {data.company && (
-                              <p className="small text-muted">{data.company}</p>
-                            )}
                           </MDBCol>
-                          <MDBCol className="text-left" lg="6">
+                          <MDBCol className="text-left" lg="5">
                             <p className="mb-0">
                               {data.contact && (
                                 <a href={"mailto:" + data.contact.email}>
@@ -285,7 +395,7 @@ class ProfilePage extends React.Component {
                               )}
                             </p>
                           </MDBCol>
-                          <MDBCol className="text-right" lg="3">
+                          <MDBCol className="text-left" lg="3">
                             {data.skills &&
                               Object.keys(data.skills).map((skill) => {
                                 if (data.skills[skill]) {
@@ -302,6 +412,11 @@ class ProfilePage extends React.Component {
                                 }
                               })}
                           </MDBCol>
+                          <MDBCol className="text-right" lg="1">
+                            {data.insight && (
+                              <>{this.calculateTrust(data.insight.trust)}</>
+                            )}
+                          </MDBCol>
                         </MDBRow>
                       </MDBListGroupItem>
                     );
@@ -316,6 +431,7 @@ class ProfilePage extends React.Component {
                   createContact: !this.state.createContact,
                 })
               }
+              refetch={this.init}
             />
           )}
         </MDBContainer>
