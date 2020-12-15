@@ -29,7 +29,7 @@ import {
 // To be added here
 
 //> Images
-import { ReactComponent as Logo } from "../../../assets/logo.svg";
+import logoIMG from "../../../assets/insight_h100.png";
 //#endregion
 
 //#region > Config
@@ -101,8 +101,10 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <MDBContainer id="login" className="text-center pt-5 mt-5">
-        <Logo
+      <MDBContainer id="login" className="text-center py-5">
+        <img
+          src={logoIMG}
+          alt="Project Insight"
           className="img-fluid"
           style={{ maxWidth: "100%", maxHeight: "100px" }}
         />
@@ -134,14 +136,14 @@ class LoginPage extends React.Component {
                 type="password"
                 id="materialFormRegisterConfirmEx4"
                 className="form-control mb-3"
-                placeholder="Passwort"
+                placeholder="Password"
                 name="password"
                 label="Password"
                 required
               />
             </MDBCol>
           </MDBRow>
-          <MDBBtn color="blue" type="submit">
+          <MDBBtn color="red" type="submit">
             <MDBIcon icon="angle-right" />
             Login
           </MDBBtn>
