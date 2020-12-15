@@ -552,6 +552,7 @@ class CreateContact extends React.Component {
     );
   }
 }
+
 //#endregion
 //#region > Redux Mapping
 const mapDispatchToProps = (dispatch) => {
@@ -560,6 +561,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 //#endregion
+
 //#region > Exports
 /**
  * Provides its connected component with the pieces of the data it needs from

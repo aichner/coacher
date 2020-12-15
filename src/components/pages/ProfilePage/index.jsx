@@ -35,6 +35,7 @@ import { CreateContact } from "../../molecules";
 // To be added here
 //#endregion
 
+//#region > Config
 const AVAILABLE_SKILLS = [
   {
     label: "3D Modelling",
@@ -117,6 +118,7 @@ const AVAILABLE_SKILLS = [
     type: "web",
   },
 ];
+//#endregion
 
 //#region > Functions
 function compare(a, b) {
@@ -154,8 +156,6 @@ class ProfilePage extends React.Component {
   };
 
   calculateTrust = (trust) => {
-    console.log(trust);
-
     switch (true) {
       case trust < 25 && trust >= 0:
         return (
@@ -417,7 +417,6 @@ class ProfilePage extends React.Component {
                             {data.skills &&
                               Object.keys(data.skills).map((skill) => {
                                 if (data.skills[skill]) {
-                                  console.log(skill);
                                   return (
                                     <MDBBadge color="primary" className="m-1">
                                       {
