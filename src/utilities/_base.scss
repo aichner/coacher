@@ -1,79 +1,21 @@
+@import "./variables";
+
 .flyout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-// Custom colors
-.bg-dark {
-  background-color: $dark !important;
-  &.darken-1 {
-    background-color: darken($dark, 5%) !important;
-  }
-  &.darken-2 {
-    background-color: darken($dark, 10%) !important;
-  }
-  &.darken-3 {
-    background-color: darken($dark, 15%) !important;
-  }
-  &.lighten-1 {
-    background-color: lighten($dark, 10%) !important;
-  }
-  &.lighten-2 {
-    background-color: lighten($dark, 20%) !important;
-  }
-  &.lighten-3 {
-    background-color: lighten($dark, 30%) !important;
-  }
+main {
+  margin-top: auto;
+  margin-bottom: auto;
 }
-.bg-red {
-  background-color: $red !important;
-  &.darken-1 {
-    background-color: darken($red, 10%) !important;
-  }
-  &.darken-2 {
-    background-color: darken($red, 20%) !important;
-  }
-  &.darken-3 {
-    background-color: darken($red, 30%) !important;
-  }
-  &.lighten-1 {
-    background-color: lighten($red, 10%) !important;
-  }
-  &.lighten-2 {
-    background-color: lighten($red, 20%) !important;
-  }
-  &.lighten-3 {
-    background-color: lighten($red, 30%) !important;
-  }
-}
-.bg-green {
-  background-color: $green !important;
-  &.darken-1 {
-    background-color: darken($green, 10%) !important;
-  }
-  &.darken-2 {
-    background-color: darken($green, 20%) !important;
-  }
-  &.darken-3 {
-    background-color: darken($green, 30%) !important;
-  }
-  &.lighten-1 {
-    background-color: lighten($green, 10%) !important;
-  }
-  &.lighten-2 {
-    background-color: lighten($green, 20%) !important;
-  }
-  &.lighten-3 {
-    background-color: lighten($green, 30%) !important;
-  }
-}
-
 // Custom text
 .red-text {
   color: $red !important;
 }
+
 .pink-text {
   color: $pink !important;
 }
@@ -81,12 +23,23 @@
 // Buttons
 .btn {
   box-shadow: none !important;
+
+  &.btn-blue {
+    background: $blue !important;
+
+    &:hover {
+      background: lighten($blue, 5%) !important;
+    }
+  }
+
   &:hover {
     box-shadow: none;
   }
+
   &:active {
     box-shadow: none;
   }
+
   &:focus {
     box-shadow: none;
   }
@@ -104,8 +57,38 @@
 
 // Fix icon spacing in buttons
 .btn {
+  &.btn-red {
+    background: #ff0000 !important;
+
+    &:hover {
+      background: darken(#ff0000, 5%) !important;
+    }
+  }
+
   i {
     padding-right: 0.2rem;
+  }
+}
+
+.menu {
+  .list-group-item {
+    cursor: pointer;
+
+    i {
+      width: 30px;
+    }
+
+    &:hover {
+      background-color: darken(white, 4%) !important;
+    }
+
+    &.active {
+      color: #1967d2;
+      background-color: #e8f0fe !important;
+    }
+
+    background: darken(white, 2%) !important;
+    border: none;
   }
 }
 

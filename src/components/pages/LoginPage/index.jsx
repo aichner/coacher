@@ -29,7 +29,7 @@ import {
 // To be added here
 
 //> Images
-import IMGlogo from "../../../assets/agency-small.png";
+import logoIMG from "../../../assets/insight_h100.png";
 //#endregion
 
 //#region > Config
@@ -101,18 +101,18 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <MDBContainer id="login" className="text-center pt-5 mt-5">
+      <MDBContainer id="login" className="text-center py-5">
         <img
-          src={IMGlogo}
-          style={{ maxWidth: "100%", maxHeight: "150px" }}
-          alt="SithCult logo"
+          src={logoIMG}
+          alt="Project Insight"
           className="img-fluid"
+          style={{ maxWidth: "100%", maxHeight: "100px" }}
         />
         <form onSubmit={this.submitHandler}>
           <MDBRow className="flex-center">
             <MDBCol md="4">
               {authErrorDetails && (
-                <MDBAlert color="danger">
+                <MDBAlert color="danger" className="mt-3">
                   The password is invalid or the user does not exist.
                 </MDBAlert>
               )}
@@ -136,14 +136,14 @@ class LoginPage extends React.Component {
                 type="password"
                 id="materialFormRegisterConfirmEx4"
                 className="form-control mb-3"
-                placeholder="Passwort"
+                placeholder="Password"
                 name="password"
                 label="Password"
                 required
               />
             </MDBCol>
           </MDBRow>
-          <MDBBtn color="orange" type="submit">
+          <MDBBtn color="red" type="submit">
             <MDBIcon icon="angle-right" />
             Login
           </MDBBtn>
